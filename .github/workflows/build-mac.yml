@@ -1,0 +1,42 @@
+name: Build Mac app
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build-mac:
+    runs-on: macos-14
+    timeout-minutes: 60
+
+    steps:
+      - name: Get the code
+        uses: actions/checkout@v4
+
+      - name: Configure
+        run: >
+          cmake -S spatial-audio -B build
+          -DCMAKE_BUILD_TYPE=Release
+          -DCMAKE_OSX_ARCHITECTURES="arm64;x86_64"
+          -DCMAKE_OSX_DEPLOYMENT_TARGET=11.0
+
+      - name: Build
+        run: cmake --build build --config Release --parallel 4
+
+      - name: Run checks
+        run: ctest --test-dir build -C Release --output-on-failure
+
+      - name: Package the app
+        run: |
+          APP=$(find build -name "Spatial Renderer.app" -maxdepth 4 -type d | head -1)
+          codesign --force --deep --sign - "$APP"
+          mkdir -p dist
+          ditto -c -k --keepParent "$APP" "dist/Spatial-Renderer-mac.zip"
+
+      - name: Upload the app
+        uses: actions/upload-artifact@v4
+        with:
+          name: Spatial-Renderer-mac
+          path: dist/Spatial-Renderer-mac.zip
+          retention-days: 30
