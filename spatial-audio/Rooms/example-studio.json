@@ -1,0 +1,14 @@
+{
+  "name": "Example studio",
+  "size": { "width": 6.0, "depth": 5.0, "height": 3.0 },
+  "speakers": [
+    { "name": "Front left",        "type": "regular",    "x": -2.0, "y": 2.0,  "z": 1.2, "output": 1, "trim_db": 0.0 },
+    { "name": "Front right",       "type": "regular",    "x": 2.0,  "y": 2.0,  "z": 1.2, "output": 2, "trim_db": 0.0 },
+    { "name": "Back right",        "type": "regular",    "x": 2.0,  "y": -2.0, "z": 1.2, "output": 3, "trim_db": 0.0 },
+    { "name": "Back left",         "type": "regular",    "x": -2.0, "y": -2.0, "z": 1.2, "output": 4, "trim_db": 0.0 },
+    { "name": "Front left high",   "type": "regular",    "x": -2.0, "y": 2.0,  "z": 2.6, "output": 5, "trim_db": 0.0 },
+    { "name": "Front right high",  "type": "regular",    "x": 2.0,  "y": 2.0,  "z": 2.6, "output": 6, "trim_db": 0.0 },
+    { "name": "Sub",               "type": "sub",        "x": 0.0,  "y": 2.2,  "z": 0.2, "output": 7, "trim_db": 0.0 },
+    { "name": "Floor transducer",  "type": "transducer", "x": 0.0,  "y": 0.0,  "z": 0.0, "output": 8, "trim_db": -3.0 }
+  ]
+}
